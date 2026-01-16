@@ -308,7 +308,7 @@ const getSingularDistance = (distance_m) => {
               <div className="font-semibold text-gray-900 text-base sm:text-2xl">
                 {meta.hotel.name}
               </div>
-              <div className="text-xs text-gray-600">{meta.hotel.area}</div>
+              <div className="text-xs text-gray-600 ">{meta.hotel.area}</div>
               <div className="text-xs text-gray-500">{meta.date}</div>
             </div>
           </div>
@@ -371,7 +371,7 @@ const getSingularDistance = (distance_m) => {
             return (
               <div
                 key={stop.id}
-                className={`bg-white rounded-xl shadow-sm transition-all flex items-center pl-4 pr-6 py-4 ${stop.completed ? 'opacity-60' : ''} ${isNow ? 'ring-2 ring-indigo-400 bg-indigo-50 ring-offset-2' : ''}`}
+                className={`bg-white rounded-xl shadow-sm transition-all flex items-center pl-4 pr-6 py-4 ${stop.completed ? 'opacity-60' : ''} ${isNow ? 'animate-pulse ring-2 ring-indigo-400 bg-sky-100 ring-offset-2' : ''}`}
               >
               {/* Left: Icon & Complete Button */}
               <div className="flex flex-col items-center mr-4 sm:mr-6">
@@ -390,7 +390,7 @@ const getSingularDistance = (distance_m) => {
                 <div className="flex items-center mb-1 justify-between">
                   <div className="flex items-center">
                     <span className="mr-1 sm:mr-2 text-base sm:text-lg align-middle">{getCategoryIcon(stop.category)}</span>
-                    <h3 className={`font-semibold text-gray-900 text-base sm:text-lg ${stop.completed ? 'line-through' : ''}`}>{stop.activity}</h3>
+                    <h3 className={`font-semibold text-gray-900 text-base sm:text-lg ${isNow ? 'text-red-600 animate-pulse' : ''} ${stop.completed ? 'line-through' : ''}`}>{stop.activity}</h3>
                   </div>
                   {stop.estimated_cost_sgd > 0 && (
                     <EditableCost
