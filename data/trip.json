@@ -1,0 +1,459 @@
+{
+  "trip": {
+    "days": [
+      {
+        "meta": {
+          "date": "2025-01-21",
+          "country": "Singapore",
+          "budget": {
+            "flight_idr": 700000,
+            "hotel_per_night_idr": 519000
+          },
+          "hotel": {
+            "name": "The Pod @ Beach Road",
+            "area": "Near Masjid Sultan"
+          }
+        },
+        "day": "d1",
+        "stops": [
+          {
+            "id": "sg_d1_001",
+            "time": "Arrival",
+            "location": "Changi Airport",
+            "activity": "Arrive in Singapore",
+            "movement": {
+              "mode": "none",
+              "desc": "",
+              "distance_m": "0"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 0,
+            "priority": "high",
+            "category": "transit",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_002",
+            "time": "After Arrival",
+            "location": "Shake Shack Jewel Changi",
+            "activity": "Eat (optional)",
+            "movement": {
+              "mode": "walk",
+              "desc": "Walk inside Jewel Changi",
+              "distance_m": "200–400"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 15,
+            "priority": "low",
+            "category": "food",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_003",
+            "time": "Morning",
+            "location": "Nicoll Highway MRT Station",
+            "activity": "Transit to hotel area",
+            "movement": {
+              "mode": "mrt",
+              "desc": "Changi Airport → Tanah Merah → Nicoll Highway",
+              "distance_m": "15000–18000"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 3,
+            "priority": "high",
+            "category": "transit",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_004",
+            "time": "12:00",
+            "location": "The Pod @ Beach Road",
+            "activity": "Drop luggage",
+            "movement": {
+              "mode": "walk",
+              "desc": "Walk from Nicoll Highway MRT",
+              "distance_m": "400–600"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 0,
+            "priority": "high",
+            "category": "rest",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": true
+          },
+          {
+            "id": "sg_d1_005",
+            "time": "12:15–13:00",
+            "location": "Haji Lane → Arab Street → Masjid Sultan → Bugis Street",
+            "activity": "Area exploration",
+            "movement": {
+              "mode": "walk",
+              "desc": "Walking route via Google Maps",
+              "distance_m": "800–1200"
+            },
+            "completed": false,
+            "notes": "https://bit.ly/43A62x1",
+            "estimated_cost_sgd": 0,
+            "priority": "high",
+            "category": "sightseeing",
+            "outdoor": true,
+            "best_time": "Late morning",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_006",
+            "time": "13:15",
+            "location": "3 Meals a Day",
+            "activity": "Lunch",
+            "movement": {
+              "mode": "walk",
+              "desc": "Near hotel",
+              "distance_m": "100–300"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 10,
+            "priority": "high",
+            "category": "food",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_007",
+            "time": "14:20",
+            "location": "Merlion Park",
+            "activity": "Sightseeing",
+            "movement": {
+              "mode": "mrt+walk",
+              "desc": "Rochor → Bugis → Raffles Place + walk",
+              "distance_m": "3500–4500"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 0,
+            "priority": "high",
+            "category": "sightseeing",
+            "outdoor": true,
+            "best_time": "Afternoon",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_008",
+            "time": "14:30",
+            "location": "CapitaSpring (Matchaya)",
+            "activity": "Matcha Yuzu Cake",
+            "movement": {
+              "mode": "walk",
+              "desc": "From Merlion Park",
+              "distance_m": "300–500"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 12,
+            "priority": "medium",
+            "category": "food",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_009",
+            "time": "15:00",
+            "location": "Chinatown",
+            "activity": "Transit",
+            "movement": {
+              "mode": "mrt",
+              "desc": "Raffles Place → Outram Park → Chinatown (Exit A)",
+              "distance_m": "3000–4000"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 3,
+            "priority": "high",
+            "category": "transit",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_010",
+            "time": "16:45",
+            "location": "Maxwell Food Centre",
+            "activity": "Hawker food",
+            "movement": {
+              "mode": "walk",
+              "desc": "From Chinatown",
+              "distance_m": "400–600"
+            },
+            "completed": false,
+            "notes": "Tian Tian Chicken Rice, Oyster Cake",
+            "estimated_cost_sgd": 12,
+            "priority": "high",
+            "category": "food",
+            "outdoor": false,
+            "best_time": "before 6pm (avoid heat)",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_011",
+            "time": "18:10",
+            "location": "Marina Barrage",
+            "activity": "Picnic",
+            "movement": {
+              "mode": "mrt+walk",
+              "desc": "Maxwell → Gardens by the Bay → walk",
+              "distance_m": "3500–4500"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 5,
+            "priority": "high",
+            "category": "rest",
+            "outdoor": true,
+            "best_time": "Sunset",
+            "requires_booking": false
+          },
+          {
+            "id": "sg_d1_012",
+            "time": "19:00",
+            "location": "The Pod @ Beach Road",
+            "activity": "Return to hotel",
+            "movement": {
+              "mode": "mrt",
+              "desc": "Gardens by the Bay → Marina Bay → Nicoll Highway",
+              "distance_m": "4000–5500"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 3,
+            "priority": "high",
+            "category": "transit",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          }
+        ]
+      },
+      {
+        "meta": {
+          "date": "2025-01-22",
+          "country": "Malaysia",
+          "city": "Melaka",
+          "budget": {
+            "transport_idr": 380000,
+            "hotel_per_night_idr": 210000
+          },
+          "hotel": {
+            "name": "Vspace Guesthouse and Cafe",
+            "area": "Melaka City"
+          }
+        },
+        "day": "d2",
+        "stops": [
+          {
+            "id": "my_d2_001",
+            "time": "04:00",
+            "location": "Queen Street",
+            "activity": "CW2 Bus to JB Sentral",
+            "movement": {
+              "mode": "bus",
+              "desc": "CW2 Bus",
+              "distance_m": "30000–35000"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 0,
+            "priority": "high",
+            "category": "transit",
+            "outdoor": false,
+            "best_time": "Early morning",
+            "requires_booking": false
+          },
+          {
+            "id": "my_d2_002",
+            "time": "05:30",
+            "location": "JB Sentral",
+            "activity": "Grab to Larkin Terminal",
+            "movement": {
+              "mode": "car",
+              "desc": "Grab ride",
+              "distance_m": "7000–9000"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 10,
+            "priority": "high",
+            "category": "transit",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "my_d2_003",
+            "time": "07:00",
+            "location": "JB Larkin Terminal",
+            "activity": "Bus to Melaka",
+            "movement": {
+              "mode": "bus",
+              "desc": "Regular Bus",
+              "distance_m": "180000–200000"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 15,
+            "priority": "high",
+            "category": "transit",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": true
+          },
+          {
+            "id": "my_d2_004",
+            "time": "11:40",
+            "location": "Vspace Guesthouse and Cafe",
+            "activity": "Drop luggage",
+            "movement": {
+              "mode": "walk",
+              "desc": "From arrival point",
+              "distance_m": "200–300"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 0,
+            "priority": "high",
+            "category": "rest",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": true
+          },
+          {
+            "id": "my_d2_005",
+            "time": "11:50",
+            "location": "Hygge Stationery",
+            "activity": "Visit shop",
+            "movement": {
+              "mode": "walk",
+              "desc": "Nearby",
+              "distance_m": "100–200"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 5,
+            "priority": "medium",
+            "category": "shopping",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "my_d2_006",
+            "time": "12:10",
+            "location": "Baba Kaya Restaurant",
+            "activity": "Lunch",
+            "movement": {
+              "mode": "walk",
+              "desc": "Short walk",
+              "distance_m": "150–300"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 10,
+            "priority": "high",
+            "category": "food",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "my_d2_007",
+            "time": "12:45",
+            "location": "The Curious Baker",
+            "activity": "Dessert",
+            "movement": {
+              "mode": "walk",
+              "desc": "Nearby café",
+              "distance_m": "100–200"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 6,
+            "priority": "medium",
+            "category": "food",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          },
+          {
+            "id": "my_d2_008",
+            "time": "13:15–16:30",
+            "location": "Melaka Heritage Area",
+            "activity": "Churches, Dutch Square, Stadthuys, A Famosa",
+            "movement": {
+              "mode": "walk",
+              "desc": "Walking heritage route",
+              "distance_m": "1500–2000"
+            },
+            "completed": false,
+            "notes": "https://bit.ly/4mNMcr9",
+            "estimated_cost_sgd": 0,
+            "priority": "high",
+            "category": "sightseeing",
+            "outdoor": true,
+            "best_time": "Afternoon",
+            "requires_booking": false
+          },
+          {
+            "id": "my_d2_009",
+            "time": "18:00",
+            "location": "Melaka River",
+            "activity": "River Cruise",
+            "movement": {
+              "mode": "walk",
+              "desc": "From hotel area",
+              "distance_m": "300–500"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 15,
+            "priority": "high",
+            "category": "sightseeing",
+            "outdoor": true,
+            "best_time": "Evening",
+            "requires_booking": true
+          },
+          {
+            "id": "my_d2_010",
+            "time": "19:30",
+            "location": "The Daily Fix / The Baboon House",
+            "activity": "Dinner",
+            "movement": {
+              "mode": "walk",
+              "desc": "Nearby",
+              "distance_m": "200–400"
+            },
+            "completed": false,
+            "notes": "",
+            "estimated_cost_sgd": 15,
+            "priority": "high",
+            "category": "food",
+            "outdoor": false,
+            "best_time": "",
+            "requires_booking": false
+          }
+        ]
+      }
+    ]
+  }
+}
