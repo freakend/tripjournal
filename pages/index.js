@@ -69,15 +69,21 @@ const TripTodoApp = () => {
   const [notesEditCount, setNotesEditCount] = useState({});
 
   const handleNotesSave = (stopId) => {
-    const value = notesDraft[stopId] !== undefined ? notesDraft[stopId] : '';
+    // Always use stop.notes as fallback if notesDraft[stopId] is undefined
     const currentDay = tripData.trip.days[selectedDay];
     const stop = currentDay.stops.find(s => s.id === stopId);
+    const value = notesDraft[stopId] !== undefined ? notesDraft[stopId] : (stop ? stop.notes || '' : '');
     const wasNotePresent = stop && stop.notes && stop.notes.trim() !== '';
     const editCount = notesEditCount[stopId] || 0;
 
     // Only save if value changed
     if ((stop && stop.notes === value)) {
       setShowNotesId(null);
+      setNotesDraft(draft => {
+        const newDraft = { ...draft };
+        delete newDraft[stopId];
+        return newDraft;
+      });
       return;
     }
 
@@ -85,6 +91,11 @@ const TripTodoApp = () => {
     if (wasNotePresent && editCount >= 1) {
       if (!window.confirm('Are you sure you want to update this note again?')) {
         setShowNotesId(null);
+        setNotesDraft(draft => {
+          const newDraft = { ...draft };
+          delete newDraft[stopId];
+          return newDraft;
+        });
         return;
       }
     }
@@ -102,7 +113,11 @@ const TripTodoApp = () => {
       }
     };
     setShowNotesId(null);
-    setNotesDraft(draft => ({ ...draft, [stopId]: value }));
+    setNotesDraft(draft => {
+      const newDraft = { ...draft };
+      delete newDraft[stopId];
+      return newDraft;
+    });
     setNotesEditCount(counts => ({ ...counts, [stopId]: wasNotePresent ? editCount + 1 : 1 }));
     saveTripData(newData);
     setTripData(newData);
@@ -356,9 +371,32 @@ const TripTodoApp = () => {
               </div>
               {/* Center: Main Info */}
               <div className="flex-1 min-w-0 flex flex-col justify-center">
-                <div className="flex items-center mb-1">
-                  <span className="mr-1 sm:mr-2 text-base sm:text-lg align-middle">{getCategoryIcon(stop.category)}</span>
-                  <h3 className={`font-semibold text-gray-900 text-base sm:text-lg ${stop.completed ? 'line-through' : ''}`}>{stop.activity}</h3>
+                <div className="flex items-center mb-1 justify-between">
+                  <div className="flex items-center">
+                    <span className="mr-1 sm:mr-2 text-base sm:text-lg align-middle">{getCategoryIcon(stop.category)}</span>
+                    <h3 className={`font-semibold text-gray-900 text-base sm:text-lg ${stop.completed ? 'line-through' : ''}`}>{stop.activity}</h3>
+                  </div>
+                  {stop.estimated_cost_sgd > 0 && (
+                    <EditableCost
+                      value={stop.estimated_cost_sgd}
+                      onChange={newValue => {
+                        const updatedStops = stops.map(s =>
+                          s.id === stop.id ? { ...s, estimated_cost_sgd: newValue } : s
+                        );
+                        const newData = {
+                          ...tripData,
+                          trip: {
+                            ...tripData.trip,
+                            days: tripData.trip.days.map((day, idx) =>
+                              idx === selectedDay ? { ...day, stops: updatedStops } : day
+                            )
+                          }
+                        };
+                        saveTripData(newData);
+                        setTripData(newData);
+                      }}
+                    />
+                  )}
                 </div>
                 <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600 mb-1">
                   <Clock size={12} className="sm:w-4 sm:h-4" />
@@ -374,6 +412,20 @@ const TripTodoApp = () => {
                     <TransportBadge className="px-2 py-0.5 rounded-full font-medium" mode={stop.movement.mode} />
                     {stop.movement.desc && (
                       <DirectionTooltip className="px-2 py-0.5 rounded-full font-medium" desc={stop.movement.desc} />
+                    )}
+                    {/* Maps button if maps link present */}
+                    {stop.maps && stop.maps.trim() !== '' && (
+                      <a
+                        href={stop.maps}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="gap-1 text-xs text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full font-medium cursor-pointer flex items-center"
+                        title="Open location in Maps"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <MapPin size={14} className="inline-block" />
+                        Maps
+                      </a>
                     )}
                     <button
                       type="button"
@@ -412,32 +464,7 @@ const TripTodoApp = () => {
                         )}
                 </div>
               </div>
-              {/* Right: Secondary Info */}
-              <div className="flex flex-col items-end ml-2">
-                <div className="flex flex-col items-end gap-1 sm:gap-2 mb-2">
-                  {stop.estimated_cost_sgd > 0 && (
-                    <EditableCost
-                      value={stop.estimated_cost_sgd}
-                      onChange={newValue => {
-                        const updatedStops = stops.map(s =>
-                          s.id === stop.id ? { ...s, estimated_cost_sgd: newValue } : s
-                        );
-                        const newData = {
-                          ...tripData,
-                          trip: {
-                            ...tripData.trip,
-                            days: tripData.trip.days.map((day, idx) =>
-                              idx === selectedDay ? { ...day, stops: updatedStops } : day
-                            )
-                          }
-                        };
-                        saveTripData(newData);
-                        setTripData(newData);
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
+              {/* Right: Secondary Info removed, EditableCost moved above */}
             </div>
           );})}
         </div>
@@ -476,12 +503,13 @@ function DirectionTooltip({ desc }) {
     <span className="relative">
       <button
         type="button"
-        className="inline-flex items-center text-xs text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full font-medium cursor-pointer"
+        className="inline-flex items-center gap-1 text-xs text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full font-medium cursor-pointer"
         onClick={() => setShow(!show)}
         tabIndex={0}
         onBlur={() => setShow(false)}
+        title="Show direction info"
       >
-        Direction
+        <Navigation size={14} className="inline-block" />
       </button>
       {show && (
         <span className="absolute left-1/2 -translate-x-1/2 mt-2 z-10 bg-gray-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
@@ -489,9 +517,7 @@ function DirectionTooltip({ desc }) {
         </span>
       )}
     </span>
-
   );
-
 }
 
 function EditableCost({ value, onChange }) {

@@ -10,8 +10,8 @@
             "hotel_per_night_idr": 519000
           },
           "hotel": {
-            "name": "The Pod @ Beach Road",
-            "area": "Near Masjid Sultan"
+            "name": "Dream Chaser Boutique Hotel",
+            "area": "https://maps.app.goo.gl/ofKHS3TjtCJP6wxt5"
           }
         },
         "day": "d1",
@@ -33,13 +33,14 @@
             "category": "transit",
             "outdoor": false,
             "best_time": "",
-            "requires_booking": false
+            "requires_booking": false,
+            "maps": ""
           },
           {
             "id": "sg_d1_002",
             "time": "After Arrival",
             "location": "Shake Shack Jewel Changi",
-            "activity": "Eat (optional)",
+            "activity": "Eat",
             "movement": {
               "mode": "walk",
               "desc": "Walk inside Jewel Changi",
@@ -47,15 +48,17 @@
             },
             "completed": false,
             "notes": "",
-            "estimated_cost_sgd": 15,
+            "estimated_cost_sgd": 10,
             "priority": "low",
             "category": "food",
             "outdoor": false,
             "best_time": "",
-            "requires_booking": false
+            "requires_booking": false,
+            "maps": ""
           },
           {
             "id": "sg_d1_003",
+            "maps": "",
             "time": "Morning",
             "location": "Nicoll Highway MRT Station",
             "activity": "Transit to hotel area",
@@ -75,6 +78,7 @@
           },
           {
             "id": "sg_d1_004",
+            "maps": "",
             "time": "12:00",
             "location": "The Pod @ Beach Road",
             "activity": "Drop luggage",
@@ -94,6 +98,7 @@
           },
           {
             "id": "sg_d1_005",
+            "maps": "",
             "time": "12:15–13:00",
             "location": "Haji Lane → Arab Street → Masjid Sultan → Bugis Street",
             "activity": "Area exploration",
@@ -103,7 +108,7 @@
               "distance_m": "800–1200"
             },
             "completed": false,
-            "notes": "https://bit.ly/43A62x1",
+            "notes": "Buy postcards",
             "estimated_cost_sgd": 0,
             "priority": "high",
             "category": "sightseeing",
@@ -113,6 +118,7 @@
           },
           {
             "id": "sg_d1_006",
+            "maps": "",
             "time": "13:15",
             "location": "3 Meals a Day",
             "activity": "Lunch",
@@ -132,11 +138,12 @@
           },
           {
             "id": "sg_d1_007",
+            "maps": "",
             "time": "14:20",
             "location": "Merlion Park",
             "activity": "Sightseeing",
             "movement": {
-              "mode": "mrt+walk",
+              "mode": "mrt",
               "desc": "Rochor → Bugis → Raffles Place + walk",
               "distance_m": "3500–4500"
             },
@@ -151,6 +158,7 @@
           },
           {
             "id": "sg_d1_008",
+            "maps": "",
             "time": "14:30",
             "location": "CapitaSpring (Matchaya)",
             "activity": "Matcha Yuzu Cake",
@@ -159,9 +167,9 @@
               "desc": "From Merlion Park",
               "distance_m": "300–500"
             },
-            "completed": false,
+            "completed": true,
             "notes": "",
-            "estimated_cost_sgd": 12,
+            "estimated_cost_sgd": 12.1,
             "priority": "medium",
             "category": "food",
             "outdoor": false,
@@ -170,6 +178,7 @@
           },
           {
             "id": "sg_d1_009",
+            "maps": "",
             "time": "15:00",
             "location": "Chinatown",
             "activity": "Transit",
@@ -189,6 +198,7 @@
           },
           {
             "id": "sg_d1_010",
+            "maps": "",
             "time": "16:45",
             "location": "Maxwell Food Centre",
             "activity": "Hawker food",
@@ -198,7 +208,7 @@
               "distance_m": "400–600"
             },
             "completed": false,
-            "notes": "Tian Tian Chicken Rice, Oyster Cake",
+            "notes": "✿ Chicken rice @ Tian Tian Hainanese #01-10/11\n✿ Oyster Cake @ Maxwell Fuzhou #01-05",
             "estimated_cost_sgd": 12,
             "priority": "high",
             "category": "food",
@@ -208,11 +218,12 @@
           },
           {
             "id": "sg_d1_011",
+            "maps": "",
             "time": "18:10",
             "location": "Marina Barrage",
             "activity": "Picnic",
             "movement": {
-              "mode": "mrt+walk",
+              "mode": "mrt",
               "desc": "Maxwell → Gardens by the Bay → walk",
               "distance_m": "3500–4500"
             },
@@ -227,6 +238,7 @@
           },
           {
             "id": "sg_d1_012",
+            "maps": "",
             "time": "19:00",
             "location": "The Pod @ Beach Road",
             "activity": "Return to hotel",
@@ -264,6 +276,7 @@
         "stops": [
           {
             "id": "my_d2_001",
+            "maps": "",
             "time": "04:00",
             "location": "Queen Street",
             "activity": "CW2 Bus to JB Sentral",
@@ -283,6 +296,7 @@
           },
           {
             "id": "my_d2_002",
+            "maps": "",
             "time": "05:30",
             "location": "JB Sentral",
             "activity": "Grab to Larkin Terminal",
@@ -293,7 +307,7 @@
             },
             "completed": false,
             "notes": "",
-            "estimated_cost_sgd": 10,
+            "estimated_cost_sgd": 20,
             "priority": "high",
             "category": "transit",
             "outdoor": false,
@@ -302,6 +316,7 @@
           },
           {
             "id": "my_d2_003",
+            "maps": "",
             "time": "07:00",
             "location": "JB Larkin Terminal",
             "activity": "Bus to Melaka",
@@ -321,6 +336,7 @@
           },
           {
             "id": "my_d2_004",
+            "maps": "",
             "time": "11:40",
             "location": "Vspace Guesthouse and Cafe",
             "activity": "Drop luggage",
@@ -340,6 +356,7 @@
           },
           {
             "id": "my_d2_005",
+            "maps": "",
             "time": "11:50",
             "location": "Hygge Stationery",
             "activity": "Visit shop",
@@ -359,6 +376,7 @@
           },
           {
             "id": "my_d2_006",
+            "maps": "",
             "time": "12:10",
             "location": "Baba Kaya Restaurant",
             "activity": "Lunch",
@@ -378,6 +396,7 @@
           },
           {
             "id": "my_d2_007",
+            "maps": "",
             "time": "12:45",
             "location": "The Curious Baker",
             "activity": "Dessert",
@@ -397,6 +416,7 @@
           },
           {
             "id": "my_d2_008",
+            "maps": "",
             "time": "13:15–16:30",
             "location": "Melaka Heritage Area",
             "activity": "Churches, Dutch Square, Stadthuys, A Famosa",
@@ -416,6 +436,7 @@
           },
           {
             "id": "my_d2_009",
+            "maps": "",
             "time": "18:00",
             "location": "Melaka River",
             "activity": "River Cruise",
@@ -435,6 +456,7 @@
           },
           {
             "id": "my_d2_010",
+            "maps": "",
             "time": "19:30",
             "location": "The Daily Fix / The Baboon House",
             "activity": "Dinner",
