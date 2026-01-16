@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Check, MapPin, Clock, DollarSign, AlertCircle, Train, Bus, Car, Navigation, RefreshCw, Notebook } from 'lucide-react';
+import { Check, MapPin, Clock, Footprints, DollarSign, AlertCircle, Train, Bus, Car, Navigation, RefreshCw, Notebook } from 'lucide-react';
 
 const TripTodoApp = () => {
     // Get current time in HH:mm format
@@ -187,6 +187,23 @@ const TripTodoApp = () => {
   // Priority color
   const getPriorityColor = () => 'border-l-gray-300';
 
+  // Helper: parse distance_m to singular meter (average if range)
+const getSingularDistance = (distance_m) => {
+  if (!distance_m) return '';
+  // Accept both en dash and hyphen
+  const parts = distance_m.split(/–|-/).map(s => s.trim());
+  if (parts.length === 2) {
+    const a = parseInt(parts[0], 10);
+    const b = parseInt(parts[1], 10);
+    if (!isNaN(a) && !isNaN(b)) {
+      return Math.round((a + b) / 2);
+    }
+  }
+  // If only one value or cannot parse, return as integer
+  const val = parseInt(distance_m, 10);
+  return isNaN(val) ? distance_m : val;
+}
+
   // Loading state
   if (loading) {
     return (
@@ -258,23 +275,22 @@ const TripTodoApp = () => {
           </div>
           {/* Day Tabs */}
           <div className="flex gap-2 overflow-x-auto pb-2">
-            {tripData.trip.days.map((day, idx) => {
-              const location = day.meta.city
-                ? `${day.meta.country} - ${day.meta.city}`
-                : day.meta.country;
-              return (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedDay(idx)}
-                  className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-all ${selectedDay === idx
-                    ? 'bg-indigo-600 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                >
-                  {location}
-                </button>
-              );
-            })}
+            <select
+              className="w-full sm:w-auto px-4 py-2 rounded-lg font-medium bg-white border border-gray-300 shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              value={selectedDay}
+              onChange={e => setSelectedDay(Number(e.target.value))}
+            >
+              {tripData.trip.days.map((day, idx) => {
+                const location = day.meta.city
+                  ? `${day.meta.country} - ${day.meta.city}`
+                  : day.meta.country;
+                return (
+                  <option key={idx} value={idx}>
+                    {location}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </div>
       </div>
@@ -398,7 +414,11 @@ const TripTodoApp = () => {
                     />
                   )}
                 </div>
+                
                 <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600 mb-1">
+                  <Footprints size={12} className="sm:w-4 sm:h-4" />
+                  <span>{getSingularDistance(stop.movement.distance_m)} m</span>
+                  <span className="text-gray-400">•</span>
                   <Clock size={12} className="sm:w-4 sm:h-4" />
                   <span>{stop.time}</span>
                   <span className="text-gray-400">•</span>
@@ -477,6 +497,7 @@ const TripTodoApp = () => {
 function TooltipLocation({ location, locationMaxLength }) {
   const [show, setShow] = useState(false);
   const truncated = location.length > locationMaxLength ? location.slice(0, locationMaxLength) + '…' : location;
+  // Responsive tooltip: adjust position if near edge
   return (
     <span className="relative">
       <span
@@ -488,7 +509,18 @@ function TooltipLocation({ location, locationMaxLength }) {
         {truncated}
       </span>
       {show && (
-        <span className="absolute left-1/2 -translate-x-1/2 mt-2 z-10 bg-gray-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg">
+        <span
+          className="absolute left-1/2 -translate-x-1/2 mt-2 z-10 bg-gray-900 text-white text-xs rounded px-3 py-2 shadow-lg max-w-xs w-max break-words"
+          style={{
+            whiteSpace: 'pre-line',
+            wordBreak: 'break-word',
+            boxSizing: 'border-box',
+            minWidth: '120px',
+            maxWidth: '220px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }}
+        >
           {location}
         </span>
       )}
