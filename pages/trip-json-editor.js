@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-
+import Navbar from '../components/Navbar';
 
 export default function TripJsonEditor() {
   const [jsonText, setJsonText] = useState('');
@@ -52,21 +51,10 @@ export default function TripJsonEditor() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center px-2 py-4 sm:px-0">
-      {/* Header with back button */}
-      <div className="w-full max-w-2xl mx-auto flex items-center justify-between py-4 px-2 sm:px-0">
-        <button
-          className="flex items-center gap-2 text-indigo-600 bg-white rounded-lg px-3 py-1 shadow hover:bg-indigo-50 transition"
-          onClick={() => router.push('/')}
-        >
-          <span className="text-lg">←</span>
-          <span className="font-medium">Back</span>
-        </button>
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Edit trip.json</h1>
-        <div style={{ width: 80 }}></div> {/* Spacer for layout symmetry */}
-      </div>
-
-      <div className="w-full max-w-2xl mx-auto bg-white rounded-xl shadow p-4 sm:p-6 flex flex-col gap-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <Navbar title="Edit trip.json" />
+      <div className="max-w-2xl mx-auto px-4 pt-8 pb-8">
+        <div className="bg-white rounded-xl shadow p-4 sm:p-6 flex flex-col gap-4">
         {loading ? (
           <div className="text-gray-600 text-center py-10">Loading...</div>
         ) : (
@@ -100,8 +88,9 @@ export default function TripJsonEditor() {
             </div>
           </>
         )}
+        </div>
+        <div className="text-xs text-gray-400 mt-4 text-center">Directly edit your trip.json file. Be careful!</div>
       </div>
-      <div className="text-xs text-gray-400 mt-4 text-center">Directly edit your trip.json file. Be careful!</div>
     </div>
   );
 }
