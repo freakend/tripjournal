@@ -17,7 +17,7 @@ function NavLink({ href, label, onClick }) {
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ title = "Trip Planner" }) {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/trip-json-editor', label: 'Trip JSON' },
@@ -29,7 +29,7 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm sticky top-0 z-20">
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold text-gray-900 tracking-tight select-none">Trip Planner</span>
+          <span className="text-2xl font-bold text-gray-900 tracking-tight select-none">{title}</span>
         </div>
         <div className="hidden md:flex gap-2 items-center">
           {navLinks.map(link => (
