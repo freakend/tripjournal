@@ -1,5 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
-import { Check, MapPin, Clock, Footprints, DollarSign, AlertCircle, Train, Bus, Car, Navigation, RefreshCw, Notebook } from 'lucide-react';
+import { Check, MapPin, Clock, Footprints, DollarSign, AlertCircle, Train, Bus, Car, Navigation, RefreshCw } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 const TripTodoApp = () => {
     // Get current time in HH:mm format
@@ -204,6 +206,9 @@ const getSingularDistance = (distance_m) => {
   return isNaN(val) ? distance_m : val;
 }
 
+
+  // Navbar is now imported as a shared component
+
   // Loading state
   if (loading) {
     return (
@@ -239,7 +244,7 @@ const getSingularDistance = (distance_m) => {
 
 
   // Location max length for tooltip truncation
-  const locationMaxLength = 20;
+  const locationMaxLength = 12;
 
   // Calculate budget stats
   const totalSpent = stops
@@ -250,53 +255,43 @@ const getSingularDistance = (distance_m) => {
   const completedCount = stops.filter(s => s.completed).length;
   const totalCount = stops.length;
 
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center mb-3">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-gray-900">Trip Planner</h1>
-              <button
-                className="ml-2 text-xl bg-white rounded-full shadow hover:bg-indigo-50 transition"
-                title="Edit trip.json"
-                onClick={() => window.location.href = '/trip-json-editor'}
-              >
-                <span role="img" aria-label="Edit trip.json">📝</span>
-              </button>
-            </div>
-            {saving && (
-              <span className="text-xs text-gray-500 flex items-center gap-1">
-                <RefreshCw size={12} className="animate-spin" />
-                Saving...
-              </span>
-            )}
-          </div>
-          {/* Day Tabs */}
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            <select
-              className="w-full sm:w-auto px-4 py-2 rounded-lg font-medium bg-white border border-gray-300 shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
-              value={selectedDay}
-              onChange={e => setSelectedDay(Number(e.target.value))}
-            >
-              {tripData.trip.days.map((day, idx) => {
-                const location = day.meta.city
-                  ? `${day.meta.country} - ${day.meta.city}`
-                  : day.meta.country;
-                return (
-                  <option key={idx} value={idx}>
-                    {location}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+      <Navbar />
+
+      {/* Header & Day Tabs */}
+      <div className="max-w-4xl mx-auto px-4 pt-2">
+        <div className="flex justify-between items-center mb-3">
+          {saving && (
+            <span className="text-xs text-gray-500 flex items-center gap-1">
+              <RefreshCw size={12} className="animate-spin" />
+              Saving...
+            </span>
+          )}
+        </div>
+        {/* Day Tabs */}
+        <div className="flex gap-2 overflow-x-auto pb-2">
+          <select
+            className="w-full sm:w-auto px-4 py-2 rounded-lg font-medium bg-white border border-gray-300 shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+            value={selectedDay}
+            onChange={e => setSelectedDay(Number(e.target.value))}
+          >
+            {tripData.trip.days.map((day, idx) => {
+              const location = day.meta.city
+                ? `${day.meta.country} - ${day.meta.city}`
+                : day.meta.country;
+              return (
+                <option key={idx} value={idx}>
+                  {location}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </div>
-
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-2 pb-6 space-y-6">
         {/* Refactored Day Info Card */}
         <div className="bg-white rounded-xl shadow-sm p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Left: Hotel & Date */}
