@@ -13,6 +13,8 @@ export default function Maps() {
   const markersRef = useRef([]);
   const [panelOpen, setPanelOpen] = useState(true);
   const [search, setSearch] = useState("");
+  const [collapsedCities, setCollapsedCities] = useState({});
+  const [activeMarkerId, setActiveMarkerId] = useState(null);
 
   // Fetch pin data
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function Maps() {
     if (!mapContainer.current || mapRef.current) return;
     mapRef.current = new maplibregl.Map({
       container: mapContainer.current,
-      style: "https://tiles.openfreemap.org/styles/positron",
+      style: "https://tiles.openfreemap.org/styles/bright",
       center: [110, -7],
       zoom: 4,
     });
@@ -189,9 +191,12 @@ export default function Maps() {
             }}
           />
         </div>
+        {/* Group pins by city */}
         <ul style={listStyle}>
-          {pins?.features
-            ?.filter((feature) => {
+          {(() => {
+            if (!pins?.features) return null;
+            // Filter pins by search
+            const filtered = pins.features.filter((feature) => {
               const props = feature.properties;
               const title = (props.title || props.food || '').toLowerCase();
               const desc = (props.description || props.place || '').toLowerCase();
@@ -199,23 +204,79 @@ export default function Maps() {
                 title.includes(search.toLowerCase()) ||
                 desc.includes(search.toLowerCase())
               );
-            })
-            .map((feature, idx) => {
-              const props = feature.properties;
-              const title = props.title || props.food || '';
-              const desc = props.description || props.place || '';
-              return (
-                <li key={idx}>
-                  <button style={itemStyle} onClick={() => handleFlyTo(feature.geometry.coordinates)}>
-                    <FaMapMarkerAlt style={iconStyle} />
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', flex: 1 }}>
-                      <span style={{ fontWeight: 600, lineHeight: 1.2 }}>{title}</span>
-                      <span style={{ color: '#888', fontSize: '0.95em', lineHeight: 1.2 }}>{desc}</span>
-                    </div>
-                  </button>
-                </li>
-              );
-            })}
+            });
+            // Group by city
+            const cityGroups = {};
+            filtered.forEach((feature) => {
+              const city = feature.properties.city || 'Unknown';
+              if (!cityGroups[city]) cityGroups[city] = [];
+              cityGroups[city].push(feature);
+            });
+            return Object.entries(cityGroups).map(([city, features]) => (
+              <li key={city} style={{ marginBottom: 8 }}>
+                <button
+                  style={{
+                    width: '100%',
+                    background: 'none',
+                    border: 'none',
+                    textAlign: 'left',
+                    fontWeight: 700,
+                    fontSize: isMobile ? 15 : 17,
+                    padding: isMobile ? '8px 10px' : '12px 16px',
+                    cursor: 'pointer',
+                    color: '#1e90ff',
+                  }}
+                  onClick={() => setCollapsedCities((prev) => ({ ...prev, [city]: !prev[city] }))}
+                >
+                  {collapsedCities[city] ? '▶' : '▼'} {city}
+                </button>
+                {!collapsedCities[city] && (
+                  <ul style={{ paddingLeft: 0 }}>
+                    {features.map((feature, idx) => {
+                      const props = feature.properties;
+                      const title = props.title || props.food || '';
+                      const desc = props.description || props.place || '';
+                      let gmaplink = props.gmaplink;
+                      if (feature.geometry?.coordinates?.length === 2) {
+                        const [lng, lat] = feature.geometry.coordinates;
+                        gmaplink = `https://www.google.com/maps?q=${lat},${lng}`;
+                      }
+                      // Use a unique id for marker (can use index or a hash of coordinates+title)
+                      const markerId = `${city}-${title}-${desc}-${feature.geometry.coordinates.join(',')}`;
+                      const isActive = activeMarkerId === markerId;
+                      return (
+                        <li key={markerId}>
+                          <button
+                            style={itemStyle}
+                            onClick={() => {
+                              handleFlyTo(feature.geometry.coordinates);
+                              setActiveMarkerId(markerId);
+                            }}
+                          >
+                            <FaMapMarkerAlt style={{ ...iconStyle, color: isActive ? '#e74c3c' : iconStyle.color }} />
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', flex: 1 }}>
+                              <span style={{ fontWeight: 600, lineHeight: 1.2 }}>{title}</span>
+                              <span style={{ color: '#888', fontSize: '0.95em', lineHeight: 1.2 }}>{desc}</span>
+                              {gmaplink && (
+                                <a
+                                  href={gmaplink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{ color: '#1e90ff', fontSize: '0.95em', textDecoration: 'underline', marginTop: 2 }}
+                                >
+                                  Direction
+                                </a>
+                              )}
+                            </div>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </li>
+            ));
+          })()}
         </ul>
         {/* Tracking buttons moved to map bottom right for mobile-first */}
       </div>
