@@ -22,6 +22,7 @@ export default function Navbar() {
     { href: '/', label: 'Home' },
     { href: '/trip-json-editor', label: 'Trip JSON' },
     { href: '/general-note', label: 'General Note' },
+    { href: '/todo-list', label: 'To Do List' },
   ];
   const [navOpen, setNavOpen] = useState(false);
   return (
